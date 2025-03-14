@@ -1,6 +1,7 @@
 package com.mayhem.lms.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import java.util.ArrayList;
@@ -25,8 +26,9 @@ public class User {
     @Column(name = "phone", length = 10)
     private String phone;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_id", referencedColumnName = "account_id", nullable = false)
+    @JoinColumn(name = "account_id", nullable = false)
     private Account accountId;
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)

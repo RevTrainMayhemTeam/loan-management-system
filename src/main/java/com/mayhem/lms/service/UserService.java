@@ -34,4 +34,11 @@ public class UserService {
     public List<User> findAllUsers(){
         return userRepository.findAll();
     }
+
+    public boolean deleteUser(Long id){
+        return userRepository.findById(id).map(profile -> {
+            userRepository.delete(profile);
+            return true;
+        }).orElse(false);
+    }
 }
