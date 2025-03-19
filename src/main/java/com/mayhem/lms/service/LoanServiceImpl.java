@@ -11,4 +11,12 @@ public class LoanServiceImpl implements LoanService{
     public LoanServiceImpl(LoanRepository loanRepository) {
         this.loanRepository = loanRepository;
     }
+
+    @Override
+    public boolean deleteLoan(Long loanId){
+        return loanRepository.findById(loanId).map(loan -> {
+            loanRepository.delete(loan);
+            return true;
+        }).orElse(false);
+    }
 }
